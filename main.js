@@ -1,6 +1,6 @@
 (function () {
   /* ====== ตั้งค่าตรงนี้ ====== */
-  var SKIN_URL = "/skin.png"; // วางไฟล์ไว้ในโฟลเดอร์ public ของ Vite
+  var SKIN_URL = "img/skin.png"; // วางไฟล์ไว้ในโฟลเดอร์ public ของ Vite
   var SLIM = true;           // true = แขนเล็กแบบ Alex, false = แบบ Steve
   var AUTO_ROTATE = true;     // หมุนเองเมื่อไม่ได้ลาก
   var ZOOM = false;            // true = ซูมด้วยล้อเมาส์ได้

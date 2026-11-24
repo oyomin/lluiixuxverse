@@ -31,6 +31,34 @@ body {
   cursor: grabbing;
 }
 
-header {
-  height: 500px;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "head head"
+    "main main"
+    "footer footer";
+}
+
+.page-header {
+  grid-area: head;
+  background-color: #232424;
+  color: #fff;
+  /* padding: 1rem; */
+  text-align: center;
+}
+
+.page-main {
+  grid-area: main;
+  /* background-color: #232424; */
+  padding: 1rem;
+}
+
+.page-footer {
+  grid-area: footer;
+  background-color: #232424;
+  color: #fff;
+  /* padding: 1rem; */
+  text-align: center;
 }
