@@ -9,21 +9,31 @@
 </head>
 
 <body>
+      <nav class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Memories</a>
+  </nav>
     <header>
-        <!-- <img src="/img/img3.png" alt="minecraft" class="#"> -->
+        <div class="player">
+            <h3>Secret Door</h3>
+            <img src="/img/arcticmonkeys.jpg" alt="arctic monkeys" class="imag">
+            <div class="buttons">
+                <button id="playBtn">play</button>
+                <button id="stopBtn">stop</button>
+            </div>
+
+            <div class="volume">
+                <span>-</span>
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+                <span>+</span>
+            </div>
+        </div>
+        <audio id="bgm" src="img/SecretDoor.mp3" loop preload="auto"></audio>
     </header>
-    <div class="container">
-        <header class="page-header">
-            <h1 class="title">lluiixuxverse</h1>
-            <p class="description">Minecraft Skin Viewer</p>
-        </header>
-        <main class="page-main">
-            <div id="skin-viewer"></div>
-        </main>
-        <footer class="page-footer">
-            <!-- Footer content -->
-        </footer>
-    </div>
+    <main>
+        <div id="skin-viewer"></div>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="/main.js"></script>
 </body>

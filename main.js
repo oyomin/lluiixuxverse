@@ -241,3 +241,22 @@
     renderer.render(scene, camera);
   })();
 })();
+
+const audio   = document.getElementById('bgm');
+const playBtn = document.getElementById('playBtn');
+const stopBtn = document.getElementById('stopBtn');
+const volume  = document.getElementById('volume');
+
+audio.volume = volume.value;
+
+playBtn.addEventListener('click', () => {
+  audio.play();
+});
+
+stopBtn.addEventListener('click', () => {
+  audio.pause();
+});
+
+volume.addEventListener('input', () => {
+  audio.volume = volume.value;
+});
