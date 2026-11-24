@@ -26,11 +26,43 @@
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(30, 1, 1, 400);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+  // Ambient light: softened so directional lights carve out realistic 3D face shading
+  var ambient = new THREE.AmbientLight(0xf5eee6, 0.45);
+  scene.add(ambient);
 
-  var sun = new THREE.DirectionalLight(0xffffff, 0.5);
-  sun.position.set(24, 44, 32);
-  scene.add(sun);
+  // Key light: warm nostalgic illumination from top-front-right
+  var keyLight = new THREE.DirectionalLight(0xfff8ee, 0.85);
+  keyLight.position.set(24, 42, 28);
+  scene.add(keyLight);
+
+  // Rim light: soft cool light from behind-left to give contour depth and separate edges
+  var rimLight = new THREE.DirectionalLight(0xbac7d8, 0.4);
+  rimLight.position.set(-24, 26, -26);
+  scene.add(rimLight);
+
+  // Ground contact shadow to anchor the skin on the ground
+  var shadowCanvas = document.createElement("canvas");
+  shadowCanvas.width = 128;
+  shadowCanvas.height = 128;
+  var shadowCtx = shadowCanvas.getContext("2d");
+  var shadowGrad = shadowCtx.createRadialGradient(64, 64, 0, 64, 64, 58);
+  shadowGrad.addColorStop(0, "rgba(42, 38, 32, 0.38)");
+  shadowGrad.addColorStop(0.45, "rgba(42, 38, 32, 0.16)");
+  shadowGrad.addColorStop(1, "rgba(42, 38, 32, 0)");
+  shadowCtx.fillStyle = shadowGrad;
+  shadowCtx.fillRect(0, 0, 128, 128);
+
+  var shadowTex = new THREE.CanvasTexture(shadowCanvas);
+  var shadowGeo = new THREE.PlaneGeometry(24, 24);
+  var shadowMat = new THREE.MeshBasicMaterial({
+    map: shadowTex,
+    transparent: true,
+    depthWrite: false
+  });
+  var groundShadow = new THREE.Mesh(shadowGeo, shadowMat);
+  groundShadow.rotation.x = -Math.PI / 2;
+  groundShadow.position.y = 0.05;
+  scene.add(groundShadow);
 
   // ตำแหน่งของแต่ละชิ้นบนสกิน 64x64
   var P = {
@@ -80,10 +112,12 @@
 
     var mats = rects.map(function (r) {
       var materialOptions = {
-        map: faceTex(r[0], r[1], r[2], r[3])
+        map: faceTex(r[0], r[1], r[2], r[3]),
+        roughness: 0.85,
+        metalness: 0.05
       };
       if (overlay) materialOptions.alphaTest = 0.5;
-      return new THREE.MeshLambertMaterial(materialOptions);
+      return new THREE.MeshStandardMaterial(materialOptions);
     });
 
     return new THREE.Mesh(
