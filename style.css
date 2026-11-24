@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth; /*ไรวะเดี๋ยวมาเอาออก*/
+  /* scroll-behavior: smooth; ไรวะเดี๋ยวมาเอาออก */
 }
 
 body {
@@ -10,7 +10,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #232424;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui;
 }
 
 #skin-viewer {
